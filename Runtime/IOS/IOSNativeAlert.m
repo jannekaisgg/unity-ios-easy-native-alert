@@ -47,6 +47,11 @@ void _IOSShowAlertMsg (int alertStyle, char* title, char* message, char* buttons
         }
     }
 
+    if let popoverController = alert.popoverPresentationController {
+        popoverController.sourceView = self.TARGET_OBJECT // TARGET_OBJECT will be your sender to show an alert from.
+        popoverController.sourceRect = CGRect(x: self.TARGET_OBJECT.frame.size.width/2, y: self.TARGET_OBJECT.frame.size.height/2, width: 0, height: 0)
+    }
+
     dispatch_async(dispatch_get_main_queue(), ^{
         [UnityGetGLViewController() presentViewController:alert animated:YES completion:nil];
     });
